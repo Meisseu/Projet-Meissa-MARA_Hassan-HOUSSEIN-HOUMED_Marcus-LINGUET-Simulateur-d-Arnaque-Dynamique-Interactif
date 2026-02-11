@@ -1,0 +1,4 @@
+# Ce fichier garde le dossier audio/ dans Git
+# (Git ne tracke pas les dossiers vides)
+
+Les fichiers audio seront ajoutés ici au fur et à mesure du développement.

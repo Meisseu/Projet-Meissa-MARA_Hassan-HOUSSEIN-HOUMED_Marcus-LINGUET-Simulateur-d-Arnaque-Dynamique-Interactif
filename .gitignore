@@ -1,0 +1,60 @@
+# Environnement Python
+venv/
+env/
+ENV/
+.venv
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variables d'environnement
+.env
+.env.local
+.env.*.local
+
+# Clés API et secrets
+*.key
+*.pem
+secrets.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Audio temporaires (si générés)
+audio/temp/
+*.tmp
+*.temp
+
+# Base de données locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Fichiers de backup
+*.bak
+*.backup
