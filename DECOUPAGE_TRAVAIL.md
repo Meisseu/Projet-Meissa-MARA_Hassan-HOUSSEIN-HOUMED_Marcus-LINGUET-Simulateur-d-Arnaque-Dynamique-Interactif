@@ -1,7 +1,7 @@
-# Découpage du Projet en 4 Parties - Groupe de 2 Personnes
+# Découpage du Projet en 4 Parties - Groupe de 3 Personnes
 
 ## **PARTIE 1 : Infrastructure & Agent Victime** 
-**Personne A - Estimation : 25% du projet**
+**Hassan HOUSSEIN-HOUMED - Estimation : 25% du projet**
 
 ### Objectifs:
 - Mettre en place le repository GitHub avec `.gitignore` et structure de base
@@ -35,7 +35,7 @@
 ---
 
 ## **PARTIE 2 : Agent Directeur & Système de Scripts**
-**Personne B - Estimation : 25% du projet**
+**Marcus LINGUET - Estimation : 25% du projet**
 
 ### Objectifs:
 - Créer l'**Agent "Directeur de Scénario"** (superviseur)
@@ -67,7 +67,7 @@
 ---
 
 ## **PARTIE 3 : Système d'Audience Interactif**
-**Personne A - Estimation : 25% du projet**
+**Meissa MARA - Estimation : 25% du projet**
 
 ### Objectifs:
 - Créer l'**Agent "Modérateur Audience"**
@@ -97,7 +97,7 @@
 ---
 
 ## **PARTIE 4 : Orchestration & Boucle Principale**
-**Personne B - Estimation : 25% du projet**
+**Hassan, Marcus & Meissa (Travail Collaboratif) - Estimation : 25% du projet**
 
 ### Objectifs:
 - Créer la **boucle d'exécution principale**
@@ -135,41 +135,48 @@
 
 ---
 
-## **Répartition Travail pour 2 Personnes:**
+## **Répartition Travail pour 3 Personnes:**
 
-| **Personne A** | **Personne B** |
-|----------------|----------------|
-| Partie 1: Infrastructure & Victime | Partie 2: Directeur & Scripts |
-| Partie 3: Système Audience | Partie 4: Orchestration & Tests |
+| **Hassan HOUSSEIN-HOUMED** | **Marcus LINGUET** | **Meissa MARA** |
+|----------------------------|--------------------|-----------------|
+| Partie 1: Infrastructure & Agent Victime | Partie 2: Agent Directeur & Scripts | Partie 3: Système Audience Interactif |
+| **Branche: Hassan** | **Branche: Marcus** | **Branche: Meissa** |
+
+**Partie 4 (Collaborative):** Les 3 membres travaillent ensemble sur l'orchestration finale
 
 ### **Coordination clé:**
-- **Après Partie 1+2:** Merge et test des deux agents séparément
-- **Après Partie 3:** Intégration de l'audience dans la boucle
-- **Partie 4 finale:** Personne B orchestre, Personne A aide aux tests/README
+- **Après Parties 1, 2 & 3:** Merge et test des trois composants séparément
+- **Review croisée:** Chaque membre review le code des deux autres avant merge
+- **Partie 4 finale:** Les 3 membres collaborent sur l'orchestration, tests et documentation
 
 ### **Timeline suggérée:**
-- **Semaines 1-2:** Parties 1 & 2 (en parallèle)
-- **Semaine 3:** Partie 3 + Intégration
-- **Semaine 4:** Partie 4 + Polissage + Documentation
+- **Semaines 1-2:** Parties 1, 2 & 3 (en parallèle - chacun sur sa branche)
+- **Semaine 3:** Review croisée + Merge + Tests d'intégration
+- **Semaine 4:** Partie 4 (collaborative) + Polissage + Documentation finale
 
 ---
 
 ## **Points de Synchronisation Importants:**
 
 ### 🔄 Checkpoint 1 (Fin Semaine 2):
-- **Personne A** doit avoir: Agent Victime fonctionnel + Tools audio opérationnels
-- **Personne B** doit avoir: Agent Directeur fonctionnel + 2 scripts d'arnaque définis
-- **Action:** Tester les deux agents séparément, créer des interfaces temporaires
+- **Hassan** doit avoir: Agent Victime fonctionnel + Tools audio opérationnels
+- **Marcus** doit avoir: Agent Directeur fonctionnel + 2 scripts d'arnaque définis
+- **Meissa** doit avoir: Agent Modérateur + Interface Audience + Système de vote
+- **Action:** Meeting de synchronisation - Chaque membre présente son composant
 
 ### 🔄 Checkpoint 2 (Fin Semaine 3):
-- **Personne A** doit avoir: Système d'audience complet avec modérateur
-- **Personne B** commence la boucle principale
-- **Action:** Intégrer l'audience dans un prototype de boucle
+- **Tous:** Pull Requests créées pour chaque partie
+- **Review croisée:** Chacun review le code des 2 autres membres
+- **Action:** Merge des 3 branches sur main après validation
+- **Tests d'intégration:** Vérifier que les 3 composants fonctionnent ensemble
 
 ### 🔄 Checkpoint 3 (Fin Semaine 4):
-- Boucle complète fonctionnelle
-- Tests complets effectués
-- README.md rédigé avec screenshots
+- **Collaboration:** Boucle principale implémentée par les 3 membres
+- **Hassan:** Focus sur l'intégration de l'agent Victime dans la boucle
+- **Marcus:** Focus sur l'intégration du Directeur et scripts
+- **Meissa:** Focus sur l'intégration du système d'audience
+- Tests complets effectués par tous
+- README.md rédigé collaborativement avec screenshots
 - Code nettoyé, commenté, et prêt pour le rendu
 
 ---
