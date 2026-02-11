@@ -1,11 +1,11 @@
 """
-Module tools: Outils disponibles pour les agents LLM
+Tools Package - Contient tous les outils pour les agents
 
-- AudioTools: Outils pour générer des effets sonores
-- Autres outils utilitaires à venir
+Tools disponibles:
+- AudioEffectsManager: Gère les effets sonores
+- Audio tools: play_dog_bark, play_cough, play_doorbell, etc.
 """
 
-__all__ = ["AudioTools"]
+from tools.audio_tools import AudioEffectsManager, get_audio_tools, get_audio_manager
 
-# Les classes seront importées ici une fois développées
-# from .audio_tools import AudioTools
+__all__ = ["AudioEffectsManager", "get_audio_tools", "get_audio_manager"]

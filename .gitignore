@@ -58,3 +58,6 @@ audio/temp/
 # Fichiers de backup
 *.bak
 *.backup
+
+# Clés et secrets JSON
+*.json
