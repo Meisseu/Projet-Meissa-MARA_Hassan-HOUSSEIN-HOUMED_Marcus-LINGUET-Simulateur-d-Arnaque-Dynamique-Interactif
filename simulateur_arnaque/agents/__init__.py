@@ -1,14 +1,12 @@
 """
-Module agents: Contient tous les agents LLM du simulateur
+Agents Package - Contient tous les agents LLM du simulateur
 
-- VictimAgent: Agent jouant le rôle de Mme Jeanne Dubois
-- DirectorAgent: Agent superviseur orchestrant le scénario
-- ModeratorAgent: Agent gérant l'interaction avec l'audience
+Agents disponibles:
+- BaseAgent: Classe de base pour tous les agents
+- VictimAgent: Mme Jeanne Dubois (victime)
 """
 
-__all__ = ["VictimAgent", "DirectorAgent", "ModeratorAgent"]
+from agents.base_agent import BaseAgent
+from agents.victim_agent import VictimAgent
 
-# Les classes seront importées ici une fois développées
-# from .victim import VictimAgent
-# from .director import DirectorAgent
-# from .moderator import ModeratorAgent
+__all__ = ["BaseAgent", "VictimAgent"]
