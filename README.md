@@ -88,17 +88,24 @@ python -m simulateur_arnaque.main
 2. **Mode Arnaqueur Bot :** Un LLM joue l'arnaqueur automatiquement
 3. **Mode Démo :** Conversation pré-scriptée pour démonstration
 
+### Branches de Développement
+
+- **`Hassan`** : Développement Partie 1 (Infrastructure & Agent Victime)
+- **`Marcus`** : Développement Partie 2 (Agent Directeur & Scripts)
+- **`Meissa`** : Développement Partie 3 (Système Audience Interactif)
+- **`main`** : Version stable intégrée
+
 ---
 
 ## 🛠️ Fonctionnalités
 
 ### ✅ Implémentées
-- [ ] Agent Victime (Mme Jeanne Dubois) avec personnalité cohérente
-- [ ] Système de bruitages contextuels (aboiements, toux, sonnette)
-- [ ] Agent Directeur pour orchestrer le scénario
-- [ ] Scripts d'arnaque prédéfinis (Support Technique, Arnaque Bancaire)
-- [ ] Système d'audience interactif avec votes
-- [ ] Boucle principale d'exécution
+- [ ] **Agent Victime** (Mme Jeanne Dubois) - *Responsable: Hassan*
+- [ ] **Système de bruitages** contextuels - *Responsable: Hassan*
+- [ ] **Agent Directeur** pour orchestrer le scénario - *Responsable: Marcus*
+- [ ] **Scripts d'arnaque** prédéfinis - *Responsable: Marcus*
+- [x] **Système d'audience** interactif avec votes - *Responsable: Meissa* ✓
+- [ ] **Boucle principale** d'exécution - *Responsable: Tous*
 
 ### 🔄 En cours de développement
 - Configuration et structure de base ✓
@@ -166,10 +173,17 @@ _Les captures d'écran seront ajoutées au fur et à mesure du développement_
 ## 🤝 Contribution
 
 Ce projet est en développement actif. Les branches de travail sont :
-- `master` : Version stable
-- `Meisseu` : Développement Partie 1 (Infrastructure & Agent Victime)
-- `Hassan` : Développement Partie 2 (Directeur & Scripts)
-- `Marcus` : Développement Partie 3 (Audience Interactive)
+- `main` : Version stable et intégrée
+- `Hassan` : Développement Partie 1 (Infrastructure & Agent Victime)
+- `Marcus` : Développement Partie 2 (Agent Directeur & Scripts)
+- `Meissa` : Développement Partie 3 (Système Audience Interactif) ✓
+
+### Workflow Git
+1. Chaque membre travaille sur sa branche dédiée
+2. Commits réguliers avec messages descriptifs
+3. Pull Request vers `main` une fois la partie terminée
+4. Review croisée obligatoire avant merge
+5. Partie 4 développée collaborativement sur `main`
 
 ---
 
