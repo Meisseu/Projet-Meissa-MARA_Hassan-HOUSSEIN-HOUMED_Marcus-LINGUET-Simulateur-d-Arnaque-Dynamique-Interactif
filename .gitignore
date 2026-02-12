@@ -17,6 +17,12 @@ __pycache__/
 *.key
 *.pem
 secrets.json
+google-credentials.json
+*-credentials.json
+
+# Documentation interne (non versionnée)
+PARTIE_4_ORCHESTRATION.md
+INSTRUCTIONS_COMMIT.md
 
 # IDE
 .vscode/
