@@ -2,9 +2,6 @@
 VictimAgent - Agent Jeanne Dubois avec mémoire et réponses intelligentes
 """
 
-from langchain.memory import ConversationBufferMemory
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
 from .base_agent import BaseAgent
 from .victim_prompt import get_victim_prompt
 from ..config.llm_config import VICTIM_TEMPERATURE
@@ -17,24 +14,18 @@ class VictimAgent(BaseAgent):
         """Initialiser l'agent victime"""
         super().__init__(name="Jeanne Dubois", temperature=VICTIM_TEMPERATURE)
         
-        # Mémoire conversationnelle
-        self.memory = ConversationBufferMemory(
-            memory_key="chat_history",
-            return_messages=True
-        )
+        # Mémoire conversationnelle (simple liste de messages)
+        self.chat_history = []
         
         # Objectif courant
         self.current_objective = "Listen politely and be confused"
         self.audience_constraint = ""
         
-        # Template du prompt
-        self.prompt_template = PromptTemplate(
-            input_variables=["chat_history", "scammer_input", "objective", "audience_constraint"],
-            template=get_victim_prompt("{objective}", "{audience_constraint}") + "\n\nChat History:\n{chat_history}\n\nScammer: {scammer_input}\n\nJeanne:"
-        )
-        
-        # Chaîne LangChain
-        self.chain = LLMChain(llm=self.llm, prompt=self.prompt_template, memory=self.memory)
+    def _format_history(self) -> str:
+        """Formater l'historique de conversation"""
+        if not self.chat_history:
+            return ""
+        return "\n".join([f"{msg['role']}: {msg['content']}" for msg in self.chat_history])
     
     def respond(self, scammer_input: str, objective: str = None, audience_constraint: str = "") -> str:
         """
@@ -55,12 +46,21 @@ class VictimAgent(BaseAgent):
             self.audience_constraint = audience_constraint
         
         try:
-            # Générer la réponse
-            response = self.chain.run(
-                scammer_input=scammer_input,
-                objective=self.current_objective,
-                audience_constraint=self.audience_constraint
-            )
+            # Construire le prompt complet
+            history_text = self._format_history()
+            full_prompt = get_victim_prompt(self.current_objective, self.audience_constraint)
+            
+            if history_text:
+                full_prompt += f"\n\nChat History:\n{history_text}"
+            
+            full_prompt += f"\n\nScammer: {scammer_input}\n\nJeanne:"
+            
+            # Générer la réponse avec le LLM
+            response = self.llm.invoke(full_prompt).content
+            
+            # Sauvegarder dans l'historique
+            self.chat_history.append({"role": "Scammer", "content": scammer_input})
+            self.chat_history.append({"role": "Jeanne", "content": response})
             
             return response.strip()
         
@@ -70,7 +70,7 @@ class VictimAgent(BaseAgent):
     
     def reset_memory(self):
         """Réinitialiser la mémoire (nouvelle conversation)"""
-        self.memory.clear()
+        self.chat_history = []
         self.current_objective = "Listen politely and be confused"
         self.audience_constraint = ""
     
@@ -81,7 +81,7 @@ class VictimAgent(BaseAgent):
             "temperature": self.temperature,
             "current_objective": self.current_objective,
             "audience_constraint": self.audience_constraint,
-            "memory_length": len(self.memory.buffer) if hasattr(self.memory, 'buffer') else 0
+            "memory_length": len(self.chat_history)
         }
     
     def process(self, input_text: str) -> str:

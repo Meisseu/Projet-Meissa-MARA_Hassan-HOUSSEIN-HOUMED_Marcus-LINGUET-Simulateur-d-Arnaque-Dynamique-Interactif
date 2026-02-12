@@ -3,8 +3,8 @@ BaseAgent - Classe de base pour tous les agents LLM
 """
 
 from abc import ABC, abstractmethod
-from langchain_openai import ChatOpenAI
-from ..config.llm_config import OPENAI_API_KEY, OPENAI_MODEL
+from langchain_google_vertexai import ChatVertexAI
+from ..config.llm_config import GOOGLE_PROJECT_ID, GOOGLE_LOCATION, GOOGLE_MODEL
 
 
 class BaseAgent(ABC):
@@ -20,9 +20,10 @@ class BaseAgent(ABC):
         """
         self.name = name
         self.temperature = temperature
-        self.llm = ChatOpenAI(
-            api_key=OPENAI_API_KEY,
-            model_name=OPENAI_MODEL,
+        self.llm = ChatVertexAI(
+            project=GOOGLE_PROJECT_ID,
+            location=GOOGLE_LOCATION,
+            model_name=GOOGLE_MODEL,
             temperature=temperature
         )
     

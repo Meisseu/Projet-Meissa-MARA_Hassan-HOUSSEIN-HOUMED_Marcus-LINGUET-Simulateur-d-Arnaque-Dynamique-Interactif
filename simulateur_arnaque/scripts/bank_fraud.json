@@ -1,0 +1,94 @@
+{
+  "script_id": "bank_fraud",
+  "title": "Arnaque bancaire - Faux conseiller",
+  "description": "Le scammeur se fait passer pour un conseiller de la banque de la victime, prétendant détecter des activités suspectes sur son compte.",
+  "stages": [
+    {
+      "stage_id": "appel_banque",
+      "summary": "Le scammeur se présente comme un conseiller bancaire alertant sur une activité suspecte",
+      "victim_objectives": [
+        "Demander le nom complet et le service du conseiller",
+        "Vérifier le numéro de téléphone qui appelle",
+        "Proposer de rappeler la banque directement"
+      ],
+      "success_signals": [
+        "banque",
+        "conseiller",
+        "compte",
+        "activité suspecte",
+        "transaction frauduleuse",
+        "mouvement inhabituel"
+      ]
+    },
+    {
+      "stage_id": "verification_identite",
+      "summary": "Le scammeur demande des informations personnelles pour 'vérifier l'identité'",
+      "victim_objectives": [
+        "Ne JAMAIS donner d'informations complètes",
+        "Inverser la situation : demander au scammeur de VOUS identifier",
+        "Mentionner que votre banque ne demande jamais ces infos par téléphone"
+      ],
+      "success_signals": [
+        "numéro de compte",
+        "date de naissance",
+        "adresse",
+        "identité",
+        "vérification",
+        "sécurité"
+      ]
+    },
+    {
+      "stage_id": "code_securite",
+      "summary": "Le scammeur demande un code de sécurité reçu par SMS",
+      "victim_objectives": [
+        "REFUSER ABSOLUMENT de communiquer tout code",
+        "Dire que vous n'avez pas reçu de SMS",
+        "Affirmer que vous raccrochez et allez en agence"
+      ],
+      "success_signals": [
+        "code",
+        "SMS",
+        "OTP",
+        "authentification",
+        "validation",
+        "confirmation",
+        "sécurité"
+      ]
+    },
+    {
+      "stage_id": "demande_iban_carte",
+      "summary": "Le scammeur tente d'obtenir l'IBAN ou le numéro de carte bancaire",
+      "victim_objectives": [
+        "REFUSER CATÉGORIQUEMENT",
+        "Dire que ces informations sont dans un coffre",
+        "Mentionner que vous allez signaler cet appel"
+      ],
+      "success_signals": [
+        "IBAN",
+        "RIB",
+        "carte bancaire",
+        "numéro de carte",
+        "cryptogramme",
+        "CVV",
+        "date d'expiration"
+      ]
+    },
+    {
+      "stage_id": "virement_urgent",
+      "summary": "Le scammeur propose de sécuriser l'argent via un virement vers un 'compte sécurisé'",
+      "victim_objectives": [
+        "REFUSER tout virement",
+        "Rappeler qu'aucune banque ne procède ainsi",
+        "Raccrocher et contacter la vraie banque"
+      ],
+      "success_signals": [
+        "virement",
+        "transfert",
+        "compte sécurisé",
+        "protéger vos fonds",
+        "sécuriser votre argent",
+        "blocage de compte"
+      ]
+    }
+  ]
+}

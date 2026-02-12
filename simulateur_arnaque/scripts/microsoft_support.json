@@ -1,0 +1,96 @@
+{
+  "script_id": "microsoft_support",
+  "title": "Faux support technique Microsoft",
+  "description": "Arnaque classique où le scammeur se fait passer pour le support technique de Microsoft, prétendant que l'ordinateur de la victime est infecté par un virus.",
+  "stages": [
+    {
+      "stage_id": "alert_initiale",
+      "summary": "Le scammeur alerte la victime d'un prétendu virus ou problème de sécurité",
+      "victim_objectives": [
+        "Rester sceptique et demander des preuves",
+        "Ne pas paniquer face aux menaces",
+        "Demander comment il a obtenu votre numéro"
+      ],
+      "success_signals": [
+        "virus",
+        "infection",
+        "malware",
+        "problème de sécurité",
+        "ordinateur compromis",
+        "données en danger"
+      ]
+    },
+    {
+      "stage_id": "verification_technique",
+      "summary": "Le scammeur demande à la victime de vérifier des informations techniques sur son ordinateur",
+      "victim_objectives": [
+        "Inventer des excuses (lunettes cassées, pas devant l'ordinateur)",
+        "Poser des questions techniques pour déstabiliser le scammeur",
+        "Gagner du temps avec des distractions (chien, sonnette)"
+      ],
+      "success_signals": [
+        "journal d'événements",
+        "gestionnaire des tâches",
+        "panneau de configuration",
+        "cmd",
+        "invite de commandes",
+        "Observateur d'événements"
+      ]
+    },
+    {
+      "stage_id": "demande_acces_distant",
+      "summary": "Le scammeur tente de faire installer un logiciel de prise en main à distance",
+      "victim_objectives": [
+        "REFUSER catégoriquement d'installer quoi que ce soit",
+        "Prétendre ne pas savoir utiliser l'ordinateur",
+        "Demander l'aide d'un proche fictif"
+      ],
+      "success_signals": [
+        "TeamViewer",
+        "AnyDesk",
+        "prise en main",
+        "contrôle à distance",
+        "installer un logiciel",
+        "télécharger",
+        "accès distant"
+      ]
+    },
+    {
+      "stage_id": "demande_paiement",
+      "summary": "Le scammeur propose un service payant pour 'réparer' l'ordinateur",
+      "victim_objectives": [
+        "REFUSER tout paiement",
+        "Dire que vous n'avez pas de carte bancaire",
+        "Proposer de rappeler après avoir consulté votre famille"
+      ],
+      "success_signals": [
+        "paiement",
+        "carte bancaire",
+        "carte bleue",
+        "abonnement",
+        "licence",
+        "garantie",
+        "protection",
+        "euros"
+      ]
+    },
+    {
+      "stage_id": "pression_urgence",
+      "summary": "Le scammeur augmente la pression avec un sentiment d'urgence",
+      "victim_objectives": [
+        "Rester calme et ne pas céder à la pression",
+        "Raccrocher poliment",
+        "Mentionner que vous allez contacter la police"
+      ],
+      "success_signals": [
+        "urgent",
+        "immédiat",
+        "tout de suite",
+        "maintenant",
+        "trop tard",
+        "dépêcher",
+        "vite"
+      ]
+    }
+  ]
+}

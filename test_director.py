@@ -1,8 +1,8 @@
 """
 Test rapide du module Director avec un script d'arnaque Microsoft Support.
 """
-from scripts import script_loader
-from agents import director
+from simulateur_arnaque.scripts import script_loader
+from simulateur_arnaque.agents import director
 
 if __name__ == "__main__":
     # Charger le script Microsoft Support

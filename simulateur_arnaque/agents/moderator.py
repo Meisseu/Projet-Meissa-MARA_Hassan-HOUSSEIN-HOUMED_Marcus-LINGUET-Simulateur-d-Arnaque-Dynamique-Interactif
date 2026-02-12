@@ -9,9 +9,8 @@ Cet agent LLM est responsable de:
 """
 
 from typing import List, Dict, Optional
-from langchain_openai import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema import HumanMessage, SystemMessage
+from langchain_google_vertexai import ChatVertexAI
+from langchain_core.messages import HumanMessage, SystemMessage
 
 
 class ModeratorAgent:
@@ -19,17 +18,20 @@ class ModeratorAgent:
     Agent responsable de modérer et sélectionner les événements d'audience
     """
     
-    def __init__(self, api_key: str, model: str = "gpt-4-turbo-preview"):
+    def __init__(self, project_id: str = None, location: str = "us-central1", model: str = "gemini-1.5-flash"):
         """
         Initialise l'agent modérateur
         
         Args:
-            api_key: Clé API OpenAI
+            project_id: Google Cloud Project ID
+            location: Region Google Cloud
             model: Modèle LLM à utiliser
         """
-        self.llm = ChatOpenAI(
-            api_key=api_key,
-            model=model,
+        from ..config.llm_config import GOOGLE_PROJECT_ID
+        self.llm = ChatVertexAI(
+            project=project_id or GOOGLE_PROJECT_ID,
+            location=location,
+            model_name=model,
             temperature=0.7
         )
         
