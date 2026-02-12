@@ -5,9 +5,9 @@ VictimAgent - Agent Jeanne Dubois avec mémoire et réponses intelligentes
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-from agents.base_agent import BaseAgent
-from agents.victim_prompt import get_victim_prompt
-from config.llm_config import VICTIM_TEMPERATURE
+from .base_agent import BaseAgent
+from .victim_prompt import get_victim_prompt
+from ..config.llm_config import VICTIM_TEMPERATURE
 
 
 class VictimAgent(BaseAgent):

@@ -6,6 +6,6 @@ Tools disponibles:
 - Audio tools: play_dog_bark, play_cough, play_doorbell, etc.
 """
 
-from tools.audio_tools import AudioEffectsManager, get_audio_tools, get_audio_manager
+from .audio_tools import AudioEffectsManager, get_audio_tools, get_audio_manager
 
 __all__ = ["AudioEffectsManager", "get_audio_tools", "get_audio_manager"]

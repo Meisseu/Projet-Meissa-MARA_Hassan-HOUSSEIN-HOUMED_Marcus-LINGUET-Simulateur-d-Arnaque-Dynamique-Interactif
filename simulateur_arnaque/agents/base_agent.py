@@ -4,7 +4,7 @@ BaseAgent - Classe de base pour tous les agents LLM
 
 from abc import ABC, abstractmethod
 from langchain_openai import ChatOpenAI
-from config.llm_config import OPENAI_API_KEY, OPENAI_MODEL
+from ..config.llm_config import OPENAI_API_KEY, OPENAI_MODEL
 
 
 class BaseAgent(ABC):
