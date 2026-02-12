@@ -79,14 +79,31 @@ cp .env.example .env
 ### Lancement du simulateur
 
 ```bash
-python -m simulateur_arnaque.main
+# Depuis la racine du projet
+python main.py
 ```
+
+Le simulateur vous proposera :
+1. **Choix du scénario** :
+   - Faux support technique Microsoft
+   - Arnaque bancaire - Faux conseiller
+
+2. **Activation du système d'audience** (optionnel) :
+   - Mode "Oui" : Active les événements perturbateurs du public
+   - Mode "Non" : Conversation directe sans interruptions
+
+### Commandes pendant la simulation
+
+- Tapez votre message pour interagir avec Jeanne
+- `status` : Voir l'état actuel de la simulation
+- `reset` : Recommencer la simulation
+- `quit` ou `exit` : Quitter
 
 ### Modes disponibles
 
-1. **Mode Arnaqueur Humain :** Vous jouez le rôle de l'arnaqueur
-2. **Mode Arnaqueur Bot :** Un LLM joue l'arnaqueur automatiquement
-3. **Mode Démo :** Conversation pré-scriptée pour démonstration
+1. **Mode Arnaqueur Humain :** Vous jouez le rôle de l'arnaqueur (implémenté) ✓
+2. **Mode Audience Interactif :** Le public peut créer des événements perturbateurs (implémenté) ✓
+3. **Mode Simulation Complète :** Intégration Director + Victim + Audience (implémenté) ✓
 
 ### Branches de Développement
 
@@ -100,23 +117,27 @@ python -m simulateur_arnaque.main
 ## 🛠️ Fonctionnalités
 
 ### ✅ Implémentées
-- [ ] **Agent Victime** (Mme Jeanne Dubois) - *Responsable: Hassan*
-- [ ] **Système de bruitages** contextuels - *Responsable: Hassan*
-- [ ] **Agent Directeur** pour orchestrer le scénario - *Responsable: Marcus*
-- [ ] **Scripts d'arnaque** prédéfinis - *Responsable: Marcus*
+
+- [x] **Agent Victime** (Mme Jeanne Dubois) - *Responsable: Hassan* ✓
+- [x] **Système de bruitages** contextuels - *Responsable: Hassan* ✓
+- [x] **Agent Directeur** pour orchestrer le scénario - *Responsable: Marcus* ✓
+- [x] **Scripts d'arnaque** prédéfinis (Microsoft Support, Arnaque Bancaire) - *Responsable: Marcus* ✓
 - [x] **Système d'audience** interactif avec votes - *Responsable: Meissa* ✓
-- [ ] **Boucle principale** d'exécution - *Responsable: Tous*
+- [x] **Boucle principale** d'exécution (main.py) - *Responsable: Tous* ✓
 
-### 🔄 En cours de développement
-- Configuration et structure de base ✓
-- Implémentation des agents
-- Tests d'intégration
+### 🔄 État du projet
 
-### 🎯 À venir
+- ✅ Partie 1 (Hassan) : Infrastructure & Agent Victime - **COMPLÈTE**
+- ✅ Partie 2 (Marcus) : Agent Directeur & Scripts - **COMPLÈTE**
+- ✅ Partie 3 (Meissa) : Système Audience Interactif - **COMPLÈTE**
+- ✅ Partie 4 (Collaboration) : Orchestration complète - **COMPLÈTE**
+
+### 🎯 Améliorations futures
+
 - Interface web avec Streamlit
 - Support audio réel (TTS/STT)
-- Plus de scénarios d'arnaque
-- Statistiques de résistance
+- Plus de scénarios d'arnaque (phishing, faux neveu, etc.)
+- Statistiques de résistance et tableau de bord
 
 ---
 
