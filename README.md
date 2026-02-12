@@ -27,16 +27,40 @@ Le simulateur met en scène trois agents intelligents :
 Projet_arnaque/
 ├── simulateur_arnaque/          # Package principal
 │   ├── agents/                  # Agents LLM (Victime, Directeur, Modérateur)
+│   │   ├── base_agent.py
+│   │   ├── victim_agent.py
+│   │   ├── victim_prompt.py
+│   │   ├── director.py
+│   │   └── moderator.py
 │   ├── tools/                   # Outils audio et fonctions MCP
+│   │   └── audio_tools.py
 │   ├── scripts/                 # Scripts d'arnaque prédéfinis
+│   │   ├── script_loader.py
+│   │   ├── microsoft_support.json
+│   │   └── bank_fraud.json
+│   ├── config/                  # Configuration centralisée
+│   │   └── llm_config.py
 │   ├── audio/                   # Fichiers audio pour effets sonores
+│   ├── audience_events.py       # Gestion des événements audience
+│   ├── audience_interface.py    # Interface d'audience
 │   └── __init__.py
 ├── tests/                       # Tests unitaires et d'intégration
+│   ├── test_victim_agent.py
+│   ├── test_audio_tools.py
+│   ├── test_director.py
+│   ├── test_imports.py
+│   ├── test_audience_system.py
+│   └── test_integration_p1_p3.py
 ├── logs/                        # Logs des conversations
+├── main.py                      # Point d'entrée principal
+├── test_hassan_part1.py         # Test Partie 1 (Hassan)
 ├── .env.example                 # Template variables d'environnement
 ├── .gitignore                   # Fichiers à ignorer
 ├── requirements.txt             # Dépendances Python
+├── DECOUPAGE_TRAVAIL.md         # Documentation du découpage
+├── INSTRUCTIONS_COMMIT.md       # Workflow Git
 └── README.md                    # Ce fichier
+
 ```
 
 ---
@@ -44,15 +68,15 @@ Projet_arnaque/
 ## 🚀 Installation
 
 ### Prérequis
-- Python 3.9 ou supérieur
-- Compte OpenAI avec clé API (ou autre fournisseur LLM)
+- Python 3.10 ou supérieur
+- Compte OpenAI avec clé API (ou Google Vertex AI)
 
 ### Étapes d'installation
 
 1. **Cloner le repository :**
 ```bash
 git clone https://github.com/Meisseu/Projet-Meissa-MARA_Hassan-HOUSSEIN-HOUMED_Marcus-LINGUET-Simulateur-d-Arnaque-Dynamique-Interactif.git
-cd Projet-Meissa-MARA_Hassan-HOUSSEIN-HOUMED_Marcus-LINGUET-Simulateur-d-Arnaque-Dynamique-Interactif/Projet_arnaque
+cd Projet-Meissa-MARA_Hassan-HOUSSEIN-HOUMED_Marcus-LINGUET-Simulateur-d-Arnaque-Dynamique-Interactif
 ```
 
 2. **Créer un environnement virtuel :**
@@ -69,7 +93,7 @@ pip install -r requirements.txt
 4. **Configurer les variables d'environnement :**
 ```bash
 cp .env.example .env
-# Éditer .env et ajouter votre clé API OpenAI
+# Éditer .env et ajouter votre clé API (OpenAI ou Google Vertex AI)
 ```
 
 ---
@@ -79,7 +103,6 @@ cp .env.example .env
 ### Lancement du simulateur
 
 ```bash
-# Depuis la racine du projet
 python main.py
 ```
 
@@ -101,61 +124,213 @@ Le simulateur vous proposera :
 
 ### Modes disponibles
 
-1. **Mode Arnaqueur Humain :** Vous jouez le rôle de l'arnaqueur (implémenté) ✓
-2. **Mode Audience Interactif :** Le public peut créer des événements perturbateurs (implémenté) ✓
-3. **Mode Simulation Complète :** Intégration Director + Victim + Audience (implémenté) ✓
-
-### Branches de Développement
-
-- **`Hassan`** : Développement Partie 1 (Infrastructure & Agent Victime)
-- **`Marcus`** : Développement Partie 2 (Agent Directeur & Scripts)
-- **`Meissa`** : Développement Partie 3 (Système Audience Interactif)
-- **`main`** : Version stable intégrée
+1. **Mode Arnaqueur Humain :** Vous jouez le rôle de l'arnaqueur ✓
+2. **Mode Audience Interactif :** Le public peut créer des événements perturbateurs ✓
+3. **Mode Simulation Complète :** Intégration Director + Victim + Audience ✓
 
 ---
 
 ## 🛠️ Fonctionnalités
 
-### ✅ Implémentées
+### ✅ Partie 1 - Infrastructure & Agent Victime (Hassan)
 
-- [x] **Agent Victime** (Mme Jeanne Dubois) - *Responsable: Hassan* ✓
-- [x] **Système de bruitages** contextuels - *Responsable: Hassan* ✓
-- [x] **Agent Directeur** pour orchestrer le scénario - *Responsable: Marcus* ✓
-- [x] **Scripts d'arnaque** prédéfinis (Microsoft Support, Arnaque Bancaire) - *Responsable: Marcus* ✓
-- [x] **Système d'audience** interactif avec votes - *Responsable: Meissa* ✓
-- [x] **Boucle principale** d'exécution (main.py) - *Responsable: Tous* ✓
+**Status:** ✅ COMPLÈTE
 
-### 🔄 État du projet
+#### Composants Implémentés
 
-- ✅ Partie 1 (Hassan) : Infrastructure & Agent Victime - **COMPLÈTE**
-- ✅ Partie 2 (Marcus) : Agent Directeur & Scripts - **COMPLÈTE**
-- ✅ Partie 3 (Meissa) : Système Audience Interactif - **COMPLÈTE**
-- ✅ Partie 4 (Collaboration) : Orchestration complète - **COMPLÈTE**
+##### Agent Victime (VictimAgent)
+- Classe héritant de BaseAgent
+- Intégration LangChain complète
+- Mémoire conversationnelle (ConversationBufferMemory)
+- Objectifs dynamiques modulables
+- Réponses authentiques en FRANÇAIS
+- Résistance intelligente aux demandes sensibles
 
-### 🎯 Améliorations futures
+##### Système Prompt (Victim Prompt)
+- Persona détaillée : Mme Jeanne Dubois, 78 ans
+- Personnalité : lente, confuse, polie mais suspicieuse
+- Traits caractéristiques : famille, animaux (chien Scooty, chat Fluffy)
+- **RÈGLE CRITIQUE** : JAMAIS donner données réelles (password, PIN, numéros compte)
+- Peut inventer des données fictives pour paraître coopérative
+- Réponses courtes et naturelles (2-4 phrases max)
 
-- Interface web avec Streamlit
-- Support audio réel (TTS/STT)
-- Plus de scénarios d'arnaque (phishing, faux neveu, etc.)
-- Statistiques de résistance et tableau de bord
+##### Audio Tools (6 outils @tool)
+```python
+- play_dog_bark()          # Poupoune aboie frénétiquement
+- play_cough()             # Quinte de toux de 10 secondes
+- play_doorbell()          # Sonnette à la porte
+- play_tv_background()     # Télé en arrière-plan (Les Feux de l'Amour)
+- play_phone_ring()        # Téléphone qui sonne
+- play_cat_meow()          # Chat qui miaule
+```
+Chaque outil retourne un marqueur texte `[SOUND: XXX]`
+
+##### Configuration Module (LLM Config)
+- Chargement variables d'environnement (.env)
+- Paramètres LLM centralisés
+- Température Victime : 0.8 (créatif)
+- Température Directeur : 0.3 (logique)
+- Paramètres audience configurables
+
+##### Base Agent Class
+- Classe abstraite pour l'héritage
+- Initialisation ChatOpenAI
+- Méthode abstraite `process()`
+- Gestion des températures
+
+#### Tests Implémentés
+
+```python
+# test_victim_agent.py
+✅ Initialisation VictimAgent
+✅ État par défaut
+✅ Mise à jour des objectifs
+✅ Mise à jour des contraintes
+✅ Réinitialisation mémoire
+✅ Méthode process()
+
+# test_audio_tools.py
+✅ Initialisation AudioEffectsManager
+✅ Tous les 6 outils retournent les bons marqueurs
+✅ Logging des sons
+✅ Clear log fonctionne
+✅ Export log JSON
+```
+
+#### Architecture des Fichiers
+
+```
+simulateur_arnaque/
+├── agents/
+│   ├── __init__.py              # Imports centralisés
+│   ├── base_agent.py            # Classe abstraite
+│   ├── victim_agent.py          # Agent Jeanne Dubois
+│   └── victim_prompt.py         # System prompt
+├── config/
+│   ├── __init__.py
+│   └── llm_config.py            # Config centralisée
+└── tools/
+    ├── __init__.py
+    └── audio_tools.py           # Audio effects manager
+```
+
+#### Commits (8 au total)
+
+1. `feat: Add LLM config module`
+   - Configuration centralisée des paramètres
+   - Gestion .env avec python-dotenv
+
+2. `feat: Create BaseAgent class`
+   - Classe de base pour tous les agents
+   - Initialisation LangChain
+
+3. `feat: Add victim system prompt with French responses`
+   - Persona Jeanne Dubois détaillée
+   - Instructions de résistance critiques
+   - Format modulable (objectif + constraint)
+
+4. `feat: Implement VictimAgent with memory management`
+   - VictimAgent classe complète
+   - Mémoire conversationnelle
+   - Méthode respond() dynamique
+   - Reset de la mémoire
+
+5. `feat: Add audio tools with sound effects`
+   - AudioEffectsManager class
+   - 6 outils audio @tool decorators
+   - Logging des effets sonores
+
+6. `test: Add unit tests for victim agent and audio tools`
+   - Tests complets pour VictimAgent
+   - Tests complets pour audio tools
+   - Tests d'initialisation et état
+
+7. `test: Add temporary main.py for integration testing`
+   - Script simple pour tester l'intégration
+   - Tests de 3 tours de conversation
+
+8. `docs: Add docstrings and improve security with gitignore`
+   - Docstrings complets
+   - Amélioration sécurité .gitignore
+   - Exclusion *.json (clés)
+
+#### Points Techniques
+
+- **Language Choice** : Prompt en ANGLAIS (LLM optimal) → Réponses en FRANÇAIS (authentique)
+- **Température** : 0.8 pour créativité et imprévisibilité naturelle
+- **Mémoire** : ConversationBufferMemory pour contexte persistant
+- **Tools** : Décorateurs @tool pour appels directs du LLM
+- **Résistance** : Rules explicites + prompt engineering avancé
+- **Modularité** : Objectifs injectables + contraintes audience dynamiques
 
 ---
 
-## 📊 Scénarios Disponibles
+### ✅ Partie 2 - Agent Directeur & Scripts (Marcus)
 
-### 1. Support Technique Microsoft
-Arnaque classique où l'escroc prétend travailler pour Microsoft et signale un problème sur l'ordinateur de la victime.
+**Status:** ✅ COMPLÈTE
 
-### 2. Arnaque Bancaire
-L'arnaqueur se fait passer pour un conseiller bancaire alertant d'une fraude sur le compte.
+#### Composants Implémentés
+- [x] **Agent Directeur** : Analyste invisible du scénario
+- [x] **Script Loader** : Chargeur de scripts JSON
+- [x] **Scripts d'arnaque** :
+  - Support Technique Microsoft (5 étapes)
+  - Arnaque Bancaire (3 étapes)
+- [x] **Détection d'étapes** : Reconnaissance keywords
+- [x] **Adaptation stratégie** : Objectifs dynamiques pour Jeanne
+
+---
+
+### ✅ Partie 3 - Système d'Audience Interactif (Meissa)
+
+**Status:** ✅ COMPLÈTE
+
+#### Composants Implémentés
+- [x] **Agent Modérateur** : Filtre et sélectionne propositions
+- [x] **Interface Audience** : Console pour suggestions
+- [x] **Système de Vote** : Vote simulé ou réel
+- [x] **Event Manager** : Gestion événements perturbateurs
+- [x] **Integration** : Contraintes injectables dans VictimAgent
+
+---
+
+### ✅ Partie 4 - Orchestration Complète (Collaboration)
+
+**Status:** ✅ COMPLÈTE
+
+#### Composants Implémentés
+- [x] **Main Loop** (`main.py`) : Boucle principale orchestrée
+- [x] **Integration** : Liaison des 3 agents
+- [x] **Menu Scénario** : Choix du type d'arnaque
+- [x] **Audience Activation** : Toggle du système d'audience
+- [x] **Rich Output** : Affichage formaté avec colors
+- [x] **Error Handling** : Gestion des erreurs robuste
+- [x] **Logging** : Enregistrement des conversations
 
 ---
 
 ## 🧪 Tests
 
-Pour exécuter les tests :
+### Lancer tous les tests
+
 ```bash
 pytest tests/
+```
+
+### Tester une partie spécifique
+
+```bash
+# Partie 1 (Hassan)
+pytest tests/test_victim_agent.py
+pytest tests/test_audio_tools.py
+
+# Partie 2 (Marcus)
+pytest tests/test_director.py
+
+# Partie 3 (Meissa)
+pytest tests/test_audience_system.py
+
+# Integration
+pytest tests/test_integration_p1_p3.py
 ```
 
 ---
@@ -163,54 +338,102 @@ pytest tests/
 ## 📝 Documentation Technique
 
 ### Technologies utilisées
-- **LangChain** : Framework pour orchestrer les agents LLM
-- **OpenAI API** : Modèle de langage principal
-- **Python-dotenv** : Gestion des variables d'environnement
-- **Pytest** : Framework de tests
+- **LangChain** (v0.1.6) : Framework pour orchestrer les agents LLM
+- **OpenAI API** (v1.12.0) : Modèle GPT-4 principal
+- **Google Vertex AI** : Support LLM alternatif
+- **Python-dotenv** (v1.0.0) : Gestion des variables d'environnement
+- **Rich** (v13.7.0) : Affichage console formaté
+- **Pytest** (v7.4.4) : Framework de tests
 
 ### Points d'attention
+
+**SÉCURITÉ - ZÉ RO TOLÉRANCE :**
 - Les clés API ne doivent **JAMAIS** être commitées
 - Le fichier `.env` est dans `.gitignore`
+- Les fichiers `*.json` (credentials) sont exclus
 - Utiliser `.env.example` comme template
+- Vérifier l'historique Git avant push
+
+**CODE QUALITY :**
+- Docstrings complets pour chaque classe/fonction
+- Type hints pour clarté
+- Gestion d'erreurs robuste
+- Imports relatifs (`.` au lieu de noms absolus)
+- Logging des erreurs
+
+**PERFORMANCE :**
+- Mémoire conversationnelle limitable
+- Requêtes API optimisées
+- Cache local pour scripts
 
 ---
 
 ## 🎓 Contexte Académique
 
 Ce projet est réalisé dans le cadre du Master 2 Intelligence Artificielle. Il a pour objectifs :
-- Maîtriser l'orchestration de multiples agents LLM
-- Comprendre le prompt engineering avancé
-- Implémenter des outils (Tools/MCP) pour LLM
-- Créer une expérience interactive et ludique
+- ✅ Maîtriser l'orchestration de multiples agents LLM
+- ✅ Comprendre le prompt engineering avancé
+- ✅ Implémenter des outils (Tools/MCP) pour LLM
+- ✅ Créer une expérience interactive et ludique
+- ✅ Gérer un projet collaboratif multi-personnes
+- ✅ Utiliser Git efficacement avec branches et commits
 
 ---
 
 ## 📸 Screenshots
 
-_Les captures d'écran seront ajoutées au fur et à mesure du développement_
+_Les captures d'écran seront ajoutées après tests complets_
 
 ---
 
 ## 🤝 Contribution
 
-Ce projet est en développement actif. Les branches de travail sont :
-- `main` : Version stable et intégrée
-- `Hassan` : Développement Partie 1 (Infrastructure & Agent Victime)
-- `Marcus` : Développement Partie 2 (Agent Directeur & Scripts)
-- `Meissa` : Développement Partie 3 (Système Audience Interactif) ✓
+Ce projet est en développement complété. Le workflow Git utilisé :
 
-### Workflow Git
+### Branches
+
+- **`main`** : Version stable intégrée (production)
+- **`Hassan`** : Développement Partie 1 ✅ MERGÉE
+- **`Marcus`** : Développement Partie 2 ✅ MERGÉE
+- **`Meissa`** : Développement Partie 3 ✅ MERGÉE
+
+### Workflow
+
 1. Chaque membre travaille sur sa branche dédiée
-2. Commits réguliers avec messages descriptifs
+2. Commits réguliers avec messages descriptifs et clairs
 3. Pull Request vers `main` une fois la partie terminée
 4. Review croisée obligatoire avant merge
 5. Partie 4 développée collaborativement sur `main`
+
+### Commits Best Practices
+
+```
+Format: <type>: <description courte>
+
+Types:
+- feat: Nouvelle fonctionnalité
+- fix: Correction de bug
+- test: Ajout de tests
+- docs: Documentation
+- chore: Tâche administrative
+- merge: Fusion de branches
+```
+
+Exemple :
+```
+feat: Implement VictimAgent with memory management
+
+- Classe VictimAgent héritage BaseAgent
+- Mémoire conversationnelle ConversationBufferMemory
+- Méthode respond() avec objectifs modulables
+- Integration LangChain complète
+```
 
 ---
 
 ## 📜 Licence
 
-Projet académique - Master 2 IA - 2026
+Projet académique - Master 2 IA - IPSII - 2026
 
 ---
 
@@ -220,6 +443,14 @@ Ce simulateur est à but **strictement éducatif et préventif**. Il vise à sen
 
 ---
 
-## 📞 Contact
+## 📞 Contact & Questions
 
-Pour toute question sur le projet, contactez les membres du groupe via GitHub.
+Pour toute question sur le projet :
+
+- **Hassan HOUSSEIN-HOUMED** : Partie 1 (VictimAgent + Audio Tools)
+- **Marcus LINGUET** : Partie 2 (DirectorAgent + Scripts)
+- **Meissa MARA** : Partie 3 (AudienceSystem) + Coordination
+
+Contactez via GitHub ou réunion d'équipe.
+
+---
