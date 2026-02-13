@@ -4,7 +4,9 @@ BaseAgent - Classe de base pour tous les agents LLM
 
 from abc import ABC, abstractmethod
 from langchain_google_vertexai import ChatVertexAI
-from ..config.llm_config import GOOGLE_PROJECT_ID, GOOGLE_LOCATION, GOOGLE_MODEL
+from google.oauth2 import service_account
+from ..config.llm_config import GOOGLE_PROJECT_ID, GOOGLE_LOCATION, GOOGLE_MODEL, GOOGLE_CREDENTIALS
+import os
 
 
 class BaseAgent(ABC):
@@ -20,11 +22,21 @@ class BaseAgent(ABC):
         """
         self.name = name
         self.temperature = temperature
+        
+        # Charger les credentials explicitement avec le bon scope
+        credentials = None
+        if os.path.exists(GOOGLE_CREDENTIALS):
+            credentials = service_account.Credentials.from_service_account_file(
+                GOOGLE_CREDENTIALS,
+                scopes=["https://www.googleapis.com/auth/cloud-platform"]
+            )
+        
         self.llm = ChatVertexAI(
             project=GOOGLE_PROJECT_ID,
             location=GOOGLE_LOCATION,
             model_name=GOOGLE_MODEL,
-            temperature=temperature
+            temperature=temperature,
+            credentials=credentials
         )
     
     @abstractmethod

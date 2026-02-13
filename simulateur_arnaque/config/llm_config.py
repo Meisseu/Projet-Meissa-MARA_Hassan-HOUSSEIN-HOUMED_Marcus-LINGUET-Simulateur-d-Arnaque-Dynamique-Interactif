@@ -12,7 +12,7 @@ load_dotenv()
 GOOGLE_PROJECT_ID = os.getenv("GOOGLE_PROJECT_ID", "ipssi-487113")
 GOOGLE_LOCATION = os.getenv("GOOGLE_LOCATION", "us-central1")
 GOOGLE_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "google-credentials.json")
-GOOGLE_MODEL = os.getenv("GOOGLE_MODEL", "gemini-1.5-flash")
+GOOGLE_MODEL = os.getenv("GOOGLE_MODEL", "gemini-2.0-flash-001")
 
 # ===== Configuration OpenAI (deprecated, gardé pour compatibilité) =====
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
